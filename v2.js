@@ -72,18 +72,17 @@ if(S.tracks.some(q=>q.pid===pid&&Math.hypot(q.x-t.x,q.z-t.z)<1&&Math.abs(q.h0-t.
 }
 baseAttach(pid,existing,idx);
 };
-// V1 checked every connector against every other connector on every animation frame.
-// Spatial hashing makes connected-end checks scale roughly linearly with the layout.
+// Fast connector matching: sort by X, then only inspect neighbors within 1 mm.
+// Unlike the old all-pairs check, typical workloads scale near O(N log N).
 portConnections=function(){
- const ports=S.tracks.flatMap(t=>wports(t)),bucket=new Map(),result=new Map(),key=(x,y,z)=>`${x}|${y}|${z}`;
- const quant=p=>[Math.round(p.x/2),Math.round(p.y/2),Math.round(p.z/2)];
- for(const p of ports){const q=quant(p),pk=portKey(p);let match=null;
- for(let dx=-1;dx<=1&&!match;dx++)for(let dy=-1;dy<=1&&!match;dy++)for(let dz=-1;dz<=1&&!match;dz++){
-  const candidates=bucket.get(key(q[0]+dx,q[1]+dy,q[2]+dz))||[];
-  for(const other of candidates){if(other.t.id!==p.t.id&&!result.has(portKey(other))&&connectPorts(other,p)){match=other;break}}
- }
- if(match){result.set(pk,{track:match.t,index:match.idx});result.set(portKey(match),{track:p.t,index:p.idx})}
- else{const k=key(...q);if(!bucket.has(k))bucket.set(k,[]);bucket.get(k).push(p)}
+ const ports=S.tracks.flatMap(t=>wports(t)).sort((a,b)=>a.x-b.x),result=new Map();
+ for(let i=0;i<ports.length;i++){
+  const a=ports[i],ak=portKey(a);if(result.has(ak))continue;
+  for(let j=i+1;j<ports.length&&ports[j].x-a.x<1;j++){
+   const b=ports[j],bk=portKey(b);
+   if(result.has(bk)||a.t.id===b.t.id||Math.abs(a.z-b.z)>=1||Math.abs(a.y-b.y)>=1)continue;
+   if(connectPorts(a,b)){result.set(ak,{track:b.t,index:b.idx});result.set(bk,{track:a.t,index:a.idx});break}
+  }
  }
  return result;
 };
