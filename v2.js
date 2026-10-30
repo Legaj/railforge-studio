@@ -128,6 +128,10 @@ const controls=document.createElement('div');controls.className='v2Section';cont
 $('trackTab').insertBefore(controls,$('trackTab').children[1]);
 const finder=document.createElement('div');finder.className='v2Section';finder.id='v2Finder';finder.innerHTML=`<h3>Connect two open ends</h3><p class="v2Help" id="v2GapStatus">Select “Bridge a gap”, then click the first and second green connectors. RailForge searches exact-length parts.</p><div id="v2Suggestions"></div><div class="v2Buttons"><button id="v2GapClear" class="btn small">Clear selection</button></div>`;
 $('trackTab').insertBefore(finder,$('trackTab').children[2]);
+// Keep the real-size parts library visible without scrolling past V2 advanced tools.
+const catalogSection=$('catalog').closest('.section'),levelSection=$('buildHeight').closest('.section');
+$('trackTab').insertBefore(catalogSection,controls);
+$('trackTab').insertBefore(levelSection,catalogSection);
 const bar=document.createElement('div');bar.id='v2Bottom';bar.innerHTML='<div class="v2Badge" id="v2Info">Scale 1:1 · millimetres</div><button class="btn small" id="v2Top">▦ 2D plan</button><button class="btn small" id="v2Iso">▣ 3D</button>';
 $('overlay').appendChild(bar);
 $('v2Top').onclick=()=>{$('topView').click();toast('Top-down plan view: dimensions remain in mm')};$('v2Iso').onclick=()=>$('isoView').click();
