@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RailForge — Märklin M-Track 3D Studio</title>
+<style>
+:root{--bg:#0a111c;--panel:#101a29;--panel2:#152235;--border:#26364c;--text:#edf3fb;--muted:#94a5bc;--accent:#5bd5b2;--accent2:#71a9ff;--yellow:#f3c56a;--red:#fb8490}*{box-sizing:border-box}html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--text);font:13px/1.42 Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}#app{height:100%;display:flex;flex-direction:column}header{height:60px;flex:none;display:flex;align-items:center;padding:0 18px;gap:13px;border-bottom:1px solid var(--border);background:#0d1725;z-index:5}.brand{display:flex;align-items:center;gap:11px;min-width:261px}.logo{width:35px;height:35px;border:1px solid #357760;border-radius:11px;display:grid;place-items:center;color:var(--accent);background:#15352e;font-size:21px}.brand strong{display:block;font-size:15px;letter-spacing:-.5px}.brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:.8px}.vdiv{width:1px;height:26px;background:var(--border);margin:0 3px}.hgroup{display:flex;gap:6px;align-items:center}.spacer{flex:1}.btn{border:1px solid #34455a;background:#182638;color:#e7eef8;padding:8px 11px;border-radius:8px;white-space:nowrap;transition:.15s}.btn:hover{border-color:#6c91a5;background:#24384e}.btn.primary{background:#237e69;color:#fff;border-color:#369d84;font-weight:650}.btn.primary:hover{background:#2e9a7e}.btn.icon{min-width:34px;padding:8px;font-size:15px}.btn.active,.btn[data-active=true]{border-color:#65cfad;color:#b0fce2;background:#16463c}.btn.warn{color:#ffd0d4;border-color:#75474e}.small{font-size:11px;padding:6px 8px}.workspace{display:flex;min-height:0;flex:1}.panel{background:var(--panel);border-right:1px solid var(--border);width:283px;flex:none;display:flex;flex-direction:column;min-height:0;z-index:2}.panel.right{border-right:0;border-left:1px solid var(--border);width:282px}.panelHead{padding:17px 16px 12px;border-bottom:1px solid var(--border)}.eyebrow{font-size:10px;color:#86a6b5;text-transform:uppercase;letter-spacing:1.35px;font-weight:800}.panel h2{font-size:17px;font-weight:660;letter-spacing:-.45px;margin:3px 0 10px}.tabs{display:flex;border:1px solid #34455a;background:#0d1928;border-radius:9px;padding:3px;gap:2px}.tab{flex:1;border:0;background:none;color:#8ea3bb;border-radius:6px;padding:8px 2px;font-size:11px;font-weight:650}.tab.active{background:#24433f;color:#b9fee6}.scroll{overflow:auto;min-height:0;flex:1;padding:14px}.scroll::-webkit-scrollbar{width:7px}.scroll::-webkit-scrollbar-thumb{background:#2a3a4e;border-radius:9px}.section{margin-bottom:18px}.sectionTitle{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#9ab2ca;font-weight:800;margin:0 0 9px;display:flex;justify-content:space-between}.muted{color:var(--muted)}.note{font-size:11px;color:#93a7bc;line-height:1.48}.row{display:flex;align-items:center;gap:8px}.between{justify-content:space-between}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.input,.select{width:100%;border:1px solid #34465c;background:#0c1727;color:#f1f6ff;padding:8px 9px;border-radius:7px;outline:none;min-width:0}.input:focus,.select:focus{border-color:var(--accent)}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}.field label{font-size:11px;color:#afbed1}.unit{font-size:10px;color:#7f96a9}.toolGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.toolBtn{border:1px solid #33475c;background:#172538;border-radius:9px;padding:9px 7px;text-align:left;color:#d9e4f2;display:flex;align-items:center;gap:7px;font-size:11px;min-height:41px}.toolBtn span{font-size:17px;color:#80b1cf}.toolBtn.active{border-color:#4ebfa1;background:#183c37;color:#c3ffed}.catalogSearch{width:100%;margin-bottom:10px}.catTitle{font-size:11px;color:#b6c9df;margin:12px 1px 7px;font-weight:700}.part{width:100%;display:flex;align-items:center;gap:9px;background:#152237;border:1px solid #2d4156;color:#e8f2ff;padding:8px 9px;border-radius:9px;text-align:left;margin-bottom:6px}.part:hover{background:#20364b}.part.active{border-color:#5ed1af;background:#193b35}.partIcon{width:43px;height:34px;background:#0d1a28;border-radius:6px;display:grid;place-items:center;color:#74c3aa;font-size:23px;font-family:serif;flex:none}.part strong{font-size:12px;display:block}.part small{font-size:10px;color:#9baebf;display:block}.catalogEmpty{color:#8b9cac;font-size:11px;padding:15px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}.stat{background:#17273a;border:1px solid #304154;border-radius:9px;text-align:center;padding:10px 2px}.stat b{display:block;font-size:19px;line-height:1.3}.stat small{font-size:9px;color:#99adc3}.fine{color:#91a9b8;font-size:10px}.sep{height:1px;background:#2b3c4d;margin:15px 0}.check{display:flex;align-items:center;gap:8px;margin:10px 0;color:#c9d7e5;font-size:11px}.check input{accent-color:#4acba6}.pill{border-radius:12px;padding:3px 7px;font-size:10px;background:#1f394a;color:#b0d7eb}.pill.good{background:#1c473a;color:#abf7d9}.pill.bad{background:#50343c;color:#ffc5cb}.pill.amber{background:#4f422d;color:#ffe3a3}#viewport{position:relative;flex:1;min-width:0;overflow:hidden;background:#152338}canvas{width:100%;height:100%;display:block;touch-action:none;outline:none}#overlay{position:absolute;inset:0;pointer-events:none}#hud{position:absolute;left:16px;top:15px;pointer-events:none;display:flex;gap:7px}.hudItem{background:#101b2ad9;border:1px solid #3e5564;border-radius:7px;padding:7px 10px;color:#cbdde7;font-size:11px;backdrop-filter:blur(10px)}#viewTools{position:absolute;right:16px;top:16px;display:flex;gap:5px;pointer-events:auto}.floating{background:#0b1524df;border:1px solid #33495c;border-radius:10px;padding:8px;box-shadow:0 15px 35px #0005}#bottomHud{position:absolute;bottom:17px;left:16px;background:#0b1524de;border:1px solid #31465b;border-radius:9px;color:#adc0cf;font-size:11px;max-width:530px;padding:10px 13px;line-height:1.5;pointer-events:none;backdrop-filter:blur(8px)}#rightBottom{position:absolute;right:16px;bottom:17px;pointer-events:auto}#hintCard{position:absolute;top:62px;right:16px;width:260px;pointer-events:auto;background:#10243add;border:1px solid #4b6977;border-radius:12px;padding:15px;box-shadow:0 16px 40px #0008}#hintCard h3{margin:0 0 9px;font-size:14px}#hintCard p{color:#b5c8d8;font-size:11px;margin:0 0 10px;line-height:1.56}#hintCard button{float:right}.dot{display:inline-block;width:7px;height:7px;border-radius:99px;background:#5bd5b2;margin-right:5px}.insTitle{font-size:12px;font-weight:750;margin:0 0 10px}.selectionBadge{display:block;background:#142f2e;border:1px solid #37695f;border-radius:8px;padding:9px;margin-bottom:12px}.selectionBadge b{display:block;font-size:16px}.selectionBadge small{color:#96cdbe;font-size:10px}.message{padding:10px;border:1px solid #324358;background:#142437;border-radius:8px;margin:7px 0 0;font-size:11px;color:#d5e4ef}.message.alert{border-color:#7f5d44;background:#32281e;color:#f9d9a6}.message.error{border-color:#79515b;background:#30202b;color:#f8c2cf}.mapKey{display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid #26374a}.mapKey b{color:#dce7f3}.bar{height:4px;background:#26394c;border-radius:9px;overflow:hidden}.bar div{height:100%;background:#5cceaa;border-radius:9px}#toast{position:absolute;left:50%;bottom:68px;transform:translate(-50%,20px);opacity:0;transition:.2s;pointer-events:none;white-space:nowrap;background:#18372e;color:#d6ffed;padding:10px 15px;border:1px solid #4eb697;border-radius:9px;z-index:20;box-shadow:0 8px 25px #0008}#toast.on{opacity:1;transform:translate(-50%,0)}#modalBackdrop{position:fixed;inset:0;background:#020812ca;z-index:30;display:none;align-items:center;justify-content:center;padding:15px}#modalBackdrop.open{display:flex}.modal{width:min(630px,100%);background:#132034;border:1px solid #476078;border-radius:16px;box-shadow:0 30px 90px #000b;padding:23px}.modal h2{margin:0 0 12px;font-size:23px}.modal p,.modal li{font-size:12px;color:#b8cddd;line-height:1.65}.modal li{margin-bottom:5px}.key{border:1px solid #526279;background:#25334a;border-radius:4px;padding:1px 5px;color:#eff5ff;font-size:10px}.footer{padding:12px 16px;border-top:1px solid var(--border);background:#101d2d}.buttonFull{width:100%;margin-bottom:7px}.hidden{display:none!important}@media(max-width:1150px){.panel.right{width:245px}.panel{width:248px}.brand{min-width:220px}}@media(max-width:900px){.panel.right{display:none}.brand{min-width:0}.brand small{display:none}header{gap:7px;padding:0 10px}.hgroup .hideSmall{display:none}}@media(max-width:650px){.panel{width:202px}.brand strong{font-size:12px}.btn{padding:7px 8px}.hgroup .minimal{display:none}#hintCard{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+ <div class="brand"><div class="logo">▥</div><div><strong>RailForge <span style="color:var(--accent)">Studio</span></strong><small>MÄRKLIN M · H0 PLANNER</small></div></div>
+ <div class="hgroup"><button class="btn small minimal" id="newBtn">＋ New</button><button class="btn small" id="demoBtn">↻ Demo</button><button class="btn small" id="openBtn">↥ Open</button><button class="btn small" id="saveBtn">↓ Save</button></div>
+ <div class="vdiv"></div><div class="hgroup"><button title="Undo (Ctrl+Z)" class="btn icon" id="undoBtn">↶</button><button title="Redo (Ctrl+Y)" class="btn icon" id="redoBtn">↷</button></div>
+ <div class="spacer"></div><div class="hgroup"><button class="btn small hideSmall" id="shotBtn">◫ Image</button><button class="btn small hideSmall" id="objBtn">↧ OBJ</button><button class="btn primary" id="blenderBtn">↧ Export to Blender</button><button title="Help" class="btn icon" id="helpBtn">?</button></div>
+</header>
+<div class="workspace">
+ <aside class="panel">
+  <div class="panelHead"><div class="eyebrow">Create your railway</div><h2>Build playground</h2><div class="tabs"><button class="tab active" data-tab="track">▥ Track</button><button class="tab" data-tab="terrain">◈ Terrain</button><button class="tab" data-tab="scene">⌂ Scenery</button></div></div>
+  <div class="scroll" id="leftScroll">
+   <div id="trackTab">
+    <div class="section"><div class="sectionTitle">How to build</div><div class="note">Pick a part below, then click a <b style="color:#8ae9cc">glowing connector</b> on the model to snap it on. Or click an empty spot on the board to start a separate track.</div></div>
+    <div class="section"><div class="sectionTitle">New track level <span class="pill" id="levelLabel">0 mm</span></div><div class="row" style="margin-bottom:8px"><button class="btn small levelPreset" data-height="0">Ground</button><button class="btn small levelPreset" data-height="80">+80 mm</button><button class="btn small levelPreset" data-height="160">+160 mm</button></div><input type="number" id="buildHeight" class="input" value="0" min="-50" max="500" step="5"><p class="fine">Connected pieces automatically inherit the endpoint height.</p></div>
+    <div class="section"><div class="sectionTitle">M-track pieces <span id="countParts">0 types</span></div><input class="input catalogSearch" id="catalogSearch" placeholder="Search by number or type…"><div id="catalog"></div></div>
+   </div>
+   <div id="terrainTab" class="hidden"><div class="section"><div class="sectionTitle">Terrain sculpting</div><div class="note">Choose a brush, then paint directly on the 3D table. Use a bigger brush for hills and a smaller one for detailed slopes.</div></div><div class="section"><div class="toolGrid" id="terrainTools"><button class="toolBtn active" data-brush="raise"><span>⛰</span> Raise</button><button class="toolBtn" data-brush="lower"><span>◡</span> Lower</button><button class="toolBtn" data-brush="smooth"><span>≈</span> Smooth</button><button class="toolBtn" data-brush="flatten"><span>▱</span> Flatten</button></div></div><div class="section"><div class="sectionTitle">Brush settings</div><div class="field"><label>Radius <b id="radiusOut">130 mm</b></label><input id="brushRadius" type="range" min="35" max="330" step="5" value="130"></div><div class="field"><label>Strength <b id="strengthOut">8 mm</b></label><input id="brushStrength" type="range" min="2" max="25" value="8"></div><button class="btn buttonFull" id="resetTerrain">Reset terrain to flat</button></div><div class="message">To make a tunnel: sculpt a hill, select the tracks passing through it, then press <b>Mark tunnel</b> in their properties. Portals are created at the ends of tunnel sections.</div></div>
+   <div id="sceneTab" class="hidden"><div class="section"><div class="sectionTitle">Place scenery</div><p class="note">Choose an object and click on the board to place it. Click the object later to select or delete it.</p><div class="toolGrid" id="sceneryTools"><button class="toolBtn active" data-prop="pine"><span>🌲</span> Pine tree</button><button class="toolBtn" data-prop="tree"><span>🌳</span> Tree</button><button class="toolBtn" data-prop="house"><span>⌂</span> House</button><button class="toolBtn" data-prop="station"><span>▤</span> Station</button><button class="toolBtn" data-prop="rock"><span>◆</span> Rock</button><button class="toolBtn" data-prop="water"><span>◉</span> Pond</button></div></div><div class="message">Scenery is deliberately simplified so your layout stays easy to edit and renders quickly in Blender.</div></div>
+  </div>
+  <div class="footer"><div class="sectionTitle">Baseboard (millimetres)</div><div class="grid2"><div class="field" style="margin:0"><label>Length X</label><input id="boardW" class="input" type="number" step="50" min="700" max="6000" value="2200"></div><div class="field" style="margin:0"><label>Width Z</label><input id="boardD" class="input" type="number" step="50" min="500" max="4000" value="1100"></div></div><button class="btn small" id="applyBoard" style="margin-top:9px;width:100%">Apply board size</button></div>
+ </aside>
+ <main id="viewport"><canvas id="glCanvas" tabindex="0"></canvas><div id="overlay">
+  <div id="hud"><span class="hudItem"><span class="dot"></span>3D LIVE EDITOR</span><span class="hudItem" id="modeHud">TRACK BUILDER</span></div>
+  <div id="viewTools" class="floating"><button class="btn small" id="topView">Top</button><button class="btn small" id="isoView">Isometric</button><button class="btn small" id="zoomFit">Fit</button><button class="btn small" id="xrayBtn">◐ X-ray</button></div>
+  <div id="hintCard"><button class="btn small" id="dismissHint" style="padding:2px 7px">×</button><h3>Welcome to the playground</h3><p><b style="color:#8ef3d1">1.</b> Choose a track on the left.<br><b style="color:#8ef3d1">2.</b> Click a glowing green endpoint to attach.<br><b style="color:#8ef3d1">3.</b> Select any section to adjust its height and slope.</p><p><b>Orbit:</b> right-drag · <b>Pan:</b> middle-drag · <b>Zoom:</b> scroll</p><button class="btn small" id="showHelpSmall">Full guide</button></div>
+  <div id="bottomHud">Left click: select / place · Right drag: orbit · Middle drag: pan · Scroll: zoom · <span style="color:#8ce4c8">Delete</span>: remove · <span style="color:#8ce4c8">Ctrl+Z</span>: undo</div>
+  <div id="rightBottom" class="floating"><button class="btn small" id="trainBtn">▶ Preview train</button></div>
+ </div><div id="toast"></div></main>
+ <aside class="panel right"><div class="panelHead"><div class="eyebrow">Inspect & adjust</div><h2>Properties</h2><p class="note" style="margin:0">Edit the selected piece or inspect your railway.</p></div><div class="scroll" id="inspector"></div><div class="footer"><div class="row between"><span class="fine">PROTOTYPE STUDIO · v1.0</span><span class="pill good">Local & private</span></div></div></aside>
+</div></div>
+<input type="file" id="projectFile" accept=".json,application/json" hidden>
+<div id="modalBackdrop"><div class="modal"><div class="row between"><h2>Build like Lego, export to Blender</h2><button class="btn icon" id="closeModal">×</button></div><p><b>Track:</b> Choose a Märklin piece in the left panel. Click the glowing ball at a free track end to snap your new piece into the exact location and heading. Click an empty part of the table to start a separate track. Select a track section to edit its two end heights, or use the Move tool to reposition connected sections.</p><p><b>Terrain:</b> Switch to Terrain and paint with Raise, Lower, Smooth or Flatten. To create a tunnel, paint a hill over some sections, select the covered tracks and click <b>Mark as tunnel</b>. The app models portal frames; the surface remains a lightweight terrain shell rather than a physically bored tunnel.</p><p><b>Levels:</b> In track Properties, change Start height and End height (mm). The connected end of a neighboring section is adjusted automatically. Watch the grade warning; around 3% is a sensible planning target. All numbers are at H0 layout size, in millimetres.</p><p><b>Camera:</b> right-button drag to orbit; middle drag to pan; mouse wheel to zoom. Enable X-ray to see track through hills. Use the Train preview to see an approximate locomotive following a detected connected route.</p><p><b>Blender:</b> Export to Blender downloads a <b>.py</b> script. In Blender go to the <b>Scripting</b> workspace → <b>Open</b> → select the script → <b>Run Script</b>. It recreates your scene in metres, adds a camera and lighting, and sets up a basic animated train path. OBJ export provides static geometry.</p><p><b>Keys:</b> <span class="key">Delete</span> remove · <span class="key">Ctrl+Z</span> undo · <span class="key">Ctrl+Y</span> redo · <span class="key">Esc</span> clear selection. Layout is kept locally until you save it as JSON.</p><div class="row between"><span class="fine">Verified catalog core: straights, curves and standard turnouts. Advanced crossings and double slips are not included.</span><button class="btn primary" id="gotIt">Start building</button></div></div></div>
+<script>
+'use strict';
+// Self-contained minimal WebGL renderer: no network/CDN and no external libraries required.
+const $=id=>document.getElementById(id), RAD=Math.PI/180, PI=Math.PI;
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),mix=(a,b,t)=>a+(b-a)*t;
+const col=(h)=>{h=h.replace('#','');return [parseInt(h.slice(0,2),16)/255,parseInt(h.slice(2,4),16)/255,parseInt(h.slice(4,6),16)/255]};
+const C={board:col('9e7751'),edge:col('65492e'),top:col('c9b08b'),grass:col('729a67'),grass2:col('80a66b'),hill:col('6e956b'),rock:col('92968c'),track:col('637f8b'),trackTop:col('627785'),rail:col('dce1d7'),stud:col('c6ccd1'),wood:col('8c6c4f'),railWarn:col('cb746a'),selected:col('63eac2'),tree:col('357e5c'),leaf:col('50976b'),trunk:col('8b6646'),roof:col('b65e59'),wall:col('e0c79b'),house:col('a1b7c1'),water:col('5babc3'),tunnel:col('8f979d'),window:col('537a87'),ground:col('b7ad96'),support:col('929ba5'),train:col('e4b356'),train2:col('416d83')};
+const PARTS=[];
+function addPart(id,group,title,kind,p){PARTS.push({id,group,title,kind,...p})}
+for(const [id,L,title] of [['5106',180,'Full straight'],['5107',90,'Half straight'],['5108',45,'Quarter straight'],['5109',33.5,'Short straight'],['5110',22.5,'Eighth straight'],['5129',70,'Compensation straight'],['5208',8,'8 mm spacer'],['5210',16,'16 mm spacer'],['5111',180,'Feeder straight'],['5112',90,'Uncoupler straight'],['5115',180,'Contact straight'],['5131',180,'Feeder straight'],['5146',90,'Switching straight'],['7190',70,'Buffer stop (geometry)']])addPart(id,'Straights',title,'straight',{L});
+for(const [id,R,a,title] of [['5100',360,30,'R1 full curve'],['5101',360,15,'R1 half curve'],['5102',360,7.5,'R1 quarter curve'],['5103',360,30,'R1 feeder curve'],['5116',360,30,'R1 contact curve'],['5147',360,15,'R1 switching curve'],['5120',286,45,'Industrial curve'],['5200',437.4,30,'R2 full curve'],['5201',437.4,15,'R2 half curve'],['5205',437.4,5.72,'R2 short curve'],['5206',437.4,24.28,'R2 counter curve'],['5213',437.4,15,'R2 half curve']])for(const side of ['L','R'])addPart(id+side,'Curves',title+(side==='L'?' · left':' · right'),'curve',{R,a,sign:side==='L'?1:-1,article:id});
+for(const [id,R,a,sign,title] of [['5118',360,30,1,'R1 left turnout'],['5119',360,30,-1,'R1 right turnout'],['5203',437.4,24.28,1,'R2 left turnout'],['5204',437.4,24.28,-1,'R2 right turnout'],['5222',437.4,24.28,1,'R2 manual turnout left'],['5223',437.4,24.28,-1,'R2 manual turnout right']])addPart(id,'Turnouts',title,'turnout',{R,a,sign,L:180});
+const partById=Object.fromEntries(PARTS.map(p=>[p.id,p]));
+function locCurve(R,a,sign,t){const ang=a*RAD*t;return [R*Math.sin(ang),sign*R*(1-Math.cos(ang))]}
+// Explicit arclength samples (works around Array.from mapping third arg being the array itself).
+function curvePoints(R,a,sign){const n=Math.max(4,Math.ceil(a/2));return Array.from({length:n+1},(_,i)=>locCurve(R,a,sign,i/n))}
+function localPaths(p){return p.kind==='straight'?[[[0,0],[p.L,0]]]:p.kind==='curve'?[curvePoints(p.R,p.a,p.sign)]:[[[0,0],[p.L,0]],curvePoints(p.R,p.a,p.sign)]}
+function localPorts(p){if(p.kind==='straight')return [{x:0,z:0,ang:PI},{x:p.L,z:0,ang:0}];if(p.kind==='curve'){const q=locCurve(p.R,p.a,p.sign,1);return [{x:0,z:0,ang:PI},{x:q[0],z:q[1],ang:p.sign*p.a*RAD}]}const q=locCurve(p.R,p.a,p.sign,1);return [{x:0,z:0,ang:PI},{x:p.L,z:0,ang:0},{x:q[0],z:q[1],ang:p.sign*p.a*RAD}];}
+const normalize=a=>Math.atan2(Math.sin(a),Math.cos(a));
+const rot=(x,z,a)=>[x*Math.cos(a)-z*Math.sin(a),x*Math.sin(a)+z*Math.cos(a)];
+function wports(t){const p=partById[t.pid];if(!p)return [];return localPorts(p).map((q,i)=>{const [u,v]=rot(q.x,q.z,t.a);return{x:t.x+u,z:t.z+v,y:i===0?t.h0:t.h1,ang:normalize(q.ang+t.a),idx:i,t}})}
+function samplePaths(t){const p=partById[t.pid];if(!p)return [];return localPaths(p).map((path,j)=>{let total=0;const lens=[0];for(let k=1;k<path.length;k++){total+=Math.hypot(path[k][0]-path[k-1][0],path[k][1]-path[k-1][1]);lens.push(total)}return path.map(([x,z],i)=>{const [u,v]=rot(x,z,t.a);const k=total?lens[i]/total:0;return{x:t.x+u,z:t.z+v,y:mix(t.h0,t.h1,k),k,branch:j}})})}
+function lengthOf(t){const p=partById[t.pid];return p.kind==='straight'?p.L:p.R*p.a*RAD}
+function grade(t){return Math.abs(t.h1-t.h0)/Math.max(0.0001,lengthOf(t))*100}
+function connectPorts(a,b){return Math.hypot(a.x-b.x,a.z-b.z)<1.0 && Math.abs(a.y-b.y)<1 && Math.abs(Math.abs(normalize(a.ang-b.ang))-PI)<0.02}
+let serial=1;
+const GRID_X=50,GRID_Z=28;
+let S={board:{w:2200,d:1100},tracks:[],props:[],terrain:Array((GRID_X+1)*(GRID_Z+1)).fill(0)};
+let selected=null,active='5106',tab='track',brush='raise',propType='pine',buildHeight=0,heading=0,xray=false,previewRunning=false,previewTime=0,route=[],history=[],future=[],pendingHistory=null,dirty=true;
+const byId=id=>S.tracks.find(t=>t.id===id)||S.props.find(t=>t.id===id);
+function snapshot(){return JSON.stringify({S,serial})}
+function saveUndo(){history.push(snapshot());if(history.length>50)history.shift();future=[];updateUndo()}
+function undo(){if(!history.length)return;future.push(snapshot());loadSnapshot(history.pop());updateUndo();toast('Undid last edit')}
+function redo(){if(!future.length)return;history.push(snapshot());loadSnapshot(future.pop());updateUndo();toast('Redid edit')}
+function loadSnapshot(s){let q=JSON.parse(s);S=q.S;serial=q.serial||1;selected=null;refreshAll()}
+function updateUndo(){$('undoBtn').disabled=!history.length;$('redoBtn').disabled=!future.length}
+function worldOf(t,q){const [x,z]=rot(q.x,q.z,t.a);return {x:t.x+x,z:t.z+z}}
+function makeTrack(pid,x=0,z=0,a=0,h=0){return{id:serial++,pid,x,z,a,h0:h,h1:h,tunnel:false}}
+function attachTrack(pid,existing,idx){const pc=wports(existing)[idx],p=partById[pid],inPort=localPorts(p)[0];if(!pc||!p)return;const newA=normalize(pc.ang+PI-inPort.ang),r=rot(inPort.x,inPort.z,newA);const t=makeTrack(pid,pc.x-r[0],pc.z-r[1],newA,pc.y);saveUndo();S.tracks.push(t);selected={kind:'track',id:t.id};refreshAll();toast(p.article||p.id+' attached');}
+function portConnections(){const ports=S.tracks.flatMap(t=>wports(t));let result=new Map();for(let i=0;i<ports.length;i++){const a=ports[i];for(let j=i+1;j<ports.length;j++){const b=ports[j];if(a.t.id!==b.t.id&&connectPorts(a,b)){const ak=a.t.id+':'+a.idx,bk=b.t.id+':'+b.idx;result.set(ak,{track:b.t,index:b.idx});result.set(bk,{track:a.t,index:a.idx})}}}return result}
+function freePorts(){const conn=portConnections();return S.tracks.flatMap(t=>wports(t).filter(p=>!conn.has(t.id+':'+p.idx)))}
+function connectedGroup(id){const conn=portConnections(),q=[id],seen=new Set(q);while(q.length){const tid=q.shift(),t=byId(tid);if(!t)continue;for(let i=0;i<localPorts(partById[t.pid]).length;i++){const b=conn.get(tid+':'+i);if(b&&!seen.has(b.track.id)){seen.add(b.track.id);q.push(b.track.id)}}}return [...seen]}
+function updatePortHeight(t,idx,v){const conn=portConnections(),adj=conn.get(t.id+':'+idx);if(idx===0)t.h0=v;else t.h1=v;if(adj){if(adj.index===0)adj.track.h0=v;else adj.track.h1=v}}
+function seedOval(){S.tracks=[];S.props=[];S.terrain.fill(0);selected=null;serial=1;let t=makeTrack('5106',-450,-360,0,0);S.tracks.push(t);const order=[...Array(4).fill('5106'),...Array(6).fill('5100L'),...Array(5).fill('5106'),...Array(6).fill('5100L')];for(const pid of order){const last=S.tracks[S.tracks.length-1],end=wports(last)[1],np=localPorts(partById[pid])[0],a=normalize(end.ang+PI-np.ang);const r=rot(np.x,np.z,a);t=makeTrack(pid,end.x-r[0],end.z-r[1],a,end.y);S.tracks.push(t)}
+ // Small wooded hillside just beyond the track, without blocking its inner loop.
+ for(let j=0;j<=GRID_Z;j++)for(let i=0;i<=GRID_X;i++){const x=(i/GRID_X-.5)*S.board.w,z=(j/GRID_Z-.5)*S.board.d;const d=Math.hypot((x+600)/1.3,z+240);S.terrain[j*(GRID_X+1)+i]=Math.max(0,90*(1-d/360))}
+ for(let i=0;i<11;i++){const x=-890+(i%4)*65,z=-460+Math.floor(i/4)*85;S.props.push({id:serial++,type:i%3===0?'tree':'pine',x,z,scale:.75+(i%4)*.14})}
+ S.props.push({id:serial++,type:'station',x:20,z:-130,scale:1.05});S.props.push({id:serial++,type:'house',x:250,z:60,scale:1});S.props.push({id:serial++,type:'house',x:410,z:30,scale:.85});S.props.push({id:serial++,type:'water',x:-120,z:120,scale:1.15});
+}
+// --- Compact vertex-based geometry builder ---
+class Geom{constructor(){this.v=[]}tri(a,b,c,color){const ux=b[0]-a[0],uy=b[1]-a[1],uz=b[2]-a[2],vx=c[0]-a[0],vy=c[1]-a[1],vz=c[2]-a[2];let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx,n=Math.hypot(nx,ny,nz)||1;nx/=n;ny/=n;nz/=n;for(const p of [a,b,c])this.v.push(...p,nx,ny,nz,...color)}quad(a,b,c,d,color){this.tri(a,b,c,color);this.tri(a,c,d,color)}box(x,y,z,w,h,d,color){const x0=x-w/2,x1=x+w/2,y0=y,y1=y+h,z0=z-d/2,z1=z+d/2;this.quad([x0,y1,z0],[x0,y1,z1],[x1,y1,z1],[x1,y1,z0],color);this.quad([x0,y0,z1],[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],color);this.quad([x0,y0,z0],[x0,y1,z0],[x1,y1,z0],[x1,y0,z0],color);this.quad([x1,y0,z1],[x1,y1,z1],[x0,y1,z1],[x0,y0,z1],color);this.quad([x0,y0,z1],[x0,y1,z1],[x0,y1,z0],[x0,y0,z0],color);this.quad([x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1],color)}pyramid(x,y,z,rx,rz,h,color){const A=[x-rx,y,z-rz],B=[x+rx,y,z-rz],D=[x-rx,y,z+rz],E=[x+rx,y,z+rz],P=[x,y+h,z];this.tri(A,B,P,color);this.tri(B,E,P,color);this.tri(E,D,P,color);this.tri(D,A,P,color)}cone(x,y,z,r,h,color,n=7){let prev=null;for(let i=0;i<n;i++){const a=2*PI*i/n,b=2*PI*(i+1)/n,aa=[x+r*Math.cos(a),y,z+r*Math.sin(a)],bb=[x+r*Math.cos(b),y,z+r*Math.sin(b)];this.tri(aa,bb,[x,y+h,z],color)}}ribbon(path,width,off,h,color){if(path.length<2)return;for(let i=1;i<path.length;i++){const a=path[i-1],b=path[i],dx=b.x-a.x,dz=b.z-a.z,n=Math.hypot(dx,dz)||1,nx=-dz/n,nz=dx/n;let left=off-width/2,right=off+width/2;this.quad([a.x+nx*left,a.y+h,a.z+nz*left],[a.x+nx*right,a.y+h,a.z+nz*right],[b.x+nx*right,b.y+h,b.z+nz*right],[b.x+nx*left,b.y+h,b.z+nz*left],color)}}}
+let mesh={};
+function terrainIndex(i,j){return j*(GRID_X+1)+i}
+function terrainAt(x,z){let u=clamp((x/S.board.w+.5)*GRID_X,0,GRID_X-0.00001),v=clamp((z/S.board.d+.5)*GRID_Z,0,GRID_Z-0.00001),i=Math.floor(u),j=Math.floor(v),a=u-i,b=v-j;let p=S.terrain;return mix(mix(p[terrainIndex(i,j)],p[terrainIndex(i+1,j)],a),mix(p[terrainIndex(i,j+1)],p[terrainIndex(i+1,j+1)],a),b)}
+function addTerrain(g){const {w,d}=S.board;for(let j=0;j<GRID_Z;j++)for(let i=0;i<GRID_X;i++){const x0=(i/GRID_X-.5)*w,x1=((i+1)/GRID_X-.5)*w,z0=(j/GRID_Z-.5)*d,z1=((j+1)/GRID_Z-.5)*d,ha=S.terrain[terrainIndex(i,j)],hb=S.terrain[terrainIndex(i+1,j)],hc=S.terrain[terrainIndex(i+1,j+1)],hd=S.terrain[terrainIndex(i,j+1)];const base=Math.max(ha,hb,hc,hd),color=base>95?C.rock:base>40?C.hill:((i+j)%3===0?C.grass2:C.grass);g.tri([x0,ha+.5,z0],[x0,hd+.5,z1],[x1,hc+.5,z1],color);g.tri([x0,ha+.5,z0],[x1,hc+.5,z1],[x1,hb+.5,z0],color)}}
+function addTrack(g,t,highlight=false){const p=partById[t.pid],warn=grade(t)>3.5;for(const path of samplePaths(t)){const color=highlight?C.selected:warn?C.railWarn:C.trackTop;g.ribbon(path,37,0,4,color);g.ribbon(path,30,0,4.4,highlight?C.selected:C.track);g.ribbon(path,2.35,-8.25,7.3,highlight?C.selected:C.rail);g.ribbon(path,2.35,8.25,7.3,highlight?C.selected:C.rail);for(let i=0;i<path.length;i+=2){const a=path[i],b=path[Math.min(path.length-1,i+1)],dx=b.x-a.x,dz=b.z-a.z,n=Math.hypot(dx,dz)||1,nx=-dz/n,nz=dx/n;g.box(a.x,a.y+4.7,a.z,2.5,1,2.5,highlight?C.selected:C.stud)}}if(t.h0>22||t.h1>22){const path=samplePaths(t)[0];for(let i=3;i<path.length;i+=6){const q=path[i];if(q.y<25)continue;const bottom=Math.max(terrainAt(q.x,q.z),0);if(q.y>bottom+14){g.box(q.x,bottom-1,q.z,11,q.y-bottom+1,11,C.support);g.box(q.x,bottom-1,q.z,42,4,42,C.support)}}}if(t.tunnel)for(const idx of [0,1]){const q=wports(t)[idx];const hasNeighbor=portConnections().get(t.id+':'+idx);if(hasNeighbor&&hasNeighbor.track.tunnel)continue;addPortal(g,q)}}
+function addPortal(g,p){const a=p.ang,at=(u,v,y)=>{const r=rot(u,v,a);return[p.x+r[0],p.y+y,p.z+r[1]]};function beam(u,v,ww,hh,dd,material){const pos=at(u,v,0),x=pos[0],z=pos[2];rotatedBox(g,x,p.y+hh/2,z,ww,hh,dd,a,material)}beam(0,22,8,60,15,C.tunnel);beam(0,-22,8,60,15,C.tunnel);beam(0,0,8,13,52,C.tunnel);for(let sign of [-1,1]){const q=at(0,sign*17,66);g.pyramid(q[0],p.y+63,q[2],9,13,14,C.tunnel)}}
+function rotatedBox(g,x,y,z,w,h,d,a,c){const pts=[[ -w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(q=>{const r=rot(q[0],q[1],a);return[x+r[0],z+r[1]]});const bot=pts.map(q=>[q[0],y-h/2,q[1]]),top=pts.map(q=>[q[0],y+h/2,q[1]]);g.quad(...top,c);g.quad(...bot.slice().reverse(),c);for(let i=0;i<4;i++)g.quad(bot[i],bot[(i+1)%4],top[(i+1)%4],top[i],c)}
+function addProp(g,p){const x=p.x,z=p.z,y=terrainAt(x,z),s=p.scale||1;if(p.type==='pine'){g.box(x,y,z,9*s,33*s,9*s,C.trunk);g.cone(x,y+12*s,z,32*s,65*s,C.tree,7);g.cone(x,y+40*s,z,26*s,55*s,C.leaf,7)}else if(p.type==='tree'){g.box(x,y,z,11*s,48*s,11*s,C.trunk);g.cone(x,y+32*s,z,41*s,60*s,C.leaf,8);g.cone(x,y+55*s,z,34*s,42*s,C.tree,8)}else if(p.type==='rock'){g.pyramid(x,y,z,38*s,27*s,28*s,C.rock);g.pyramid(x+14*s,y,z-9*s,22*s,24*s,22*s,C.tunnel)}else if(p.type==='water'){const n=16,r=90*s;for(let i=0;i<n;i++){const a=2*PI*i/n,b=2*PI*(i+1)/n;g.tri([x,y+1.3,z],[x+r*Math.cos(a),y+1.3,z+r*.7*Math.sin(a)],[x+r*Math.cos(b),y+1.3,z+r*.7*Math.sin(b)],C.water)}}else{const station=p.type==='station',w=(station?125:72)*s,d=(station?64:62)*s,h=(station?54:64)*s;rotatedBox(g,x,y+h/2,z,w,h,d,0,station?C.house:C.wall);g.pyramid(x,y+h,z,w*.58,d*.62,24*s,C.roof);g.box(x,y+10*s,z+d/2+1,19*s,28*s,2*s,C.trunk);for(let off of [-w*.29,w*.29]){g.box(x+off,y+h*.55,z+d/2+2,18*s,19*s,2*s,C.window)}if(station)g.box(x,y+h-14*s,z+d/2+4,65*s,14*s,3*s,C.wood)}}
+function buildMesh(){let board=new Geom(),terrain=new Geom(),track=new Geom(),scenery=new Geom(),selection=new Geom(),train=new Geom();const {w,d}=S.board;board.box(0,-30,0,w,30,d,C.board);board.box(0,-36,0,w,6,d,C.edge);for(let x of [-w/2+55,w/2-55])for(let z of [-d/2+55,d/2-55])board.box(x,-175,z,38,145,38,C.edge);addTerrain(terrain);for(const t of S.tracks){if(selected&&selected.kind==='track'&&selected.id===t.id)addTrack(selection,t,true);else addTrack(track,t)}for(const p of S.props)addProp(scenery,p);mesh={board,terrain,track,scenery,selection,train};uploadAll();dirty=false;computeRoute();renderInspector()}
+// --- WebGL 3D engine ---
+const canvas=$('glCanvas'),gl=canvas.getContext('webgl',{alpha:false,antialias:true,preserveDrawingBuffer:true});
+const ctx2d=gl?null:canvas.getContext('2d');
+let graphicsOK=!!gl||!!ctx2d,prog,loc={},gpu={};
+function compile(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
+if(gl){try{prog=gl.createProgram();gl.attachShader(prog,compile(gl.VERTEX_SHADER,'attribute vec3 p; attribute vec3 n; attribute vec3 c; uniform mat4 vp; varying vec3 color; void main(){ gl_Position=vp*vec4(p,1.); float b=max(.40,dot(normalize(n),normalize(vec3(-.35,.85,.65)))*.50+.53); color=c*b; }'));gl.attachShader(prog,compile(gl.FRAGMENT_SHADER,'precision mediump float; varying vec3 color; uniform float opacity; void main(){gl_FragColor=vec4(pow(color,vec3(.87)),opacity);}'));gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(prog));gl.useProgram(prog);loc.p=gl.getAttribLocation(prog,'p');loc.n=gl.getAttribLocation(prog,'n');loc.c=gl.getAttribLocation(prog,'c');loc.vp=gl.getUniformLocation(prog,'vp');loc.opacity=gl.getUniformLocation(prog,'opacity');gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);gl.cullFace(gl.BACK);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA)}catch(e){graphicsOK=false;console.error(e)}}
+function uploadMesh(key,g){if(!gl)return;const old=gpu[key];if(old)gl.deleteBuffer(old.buf);const data=new Float32Array(g.v);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);gpu[key]={buf,count:data.length/9}}
+function uploadAll(){if(!gl)return;for(const [k,g] of Object.entries(mesh))uploadMesh(k,g)}
+function draw(key,opacity=1){const o=gpu[key];if(!o||!o.count)return;gl.uniform1f(loc.opacity,opacity);gl.bindBuffer(gl.ARRAY_BUFFER,o.buf);const stride=36;for(const [id,offset] of [[loc.p,0],[loc.n,12],[loc.c,24]]){gl.enableVertexAttribArray(id);gl.vertexAttribPointer(id,3,gl.FLOAT,false,stride,offset)}gl.drawArrays(gl.TRIANGLES,0,o.count)}
+function vadd(a,b){return[a[0]+b[0],a[1]+b[1],a[2]+b[2]]}function vsub(a,b){return[a[0]-b[0],a[1]-b[1],a[2]-b[2]]}function vmul(a,s){return[a[0]*s,a[1]*s,a[2]*s]}function vdot(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]}function vcross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]}function vn(a){const l=Math.hypot(...a)||1;return a.map(x=>x/l)}
+let camera={target:[0,0,0],az:.55,el:.9,dist:2550,fov:42*RAD},basis={};
+function getCamera(){const {target,az,el,dist}=camera;const eye=[target[0]+dist*Math.cos(el)*Math.sin(az),target[1]+dist*Math.sin(el),target[2]+dist*Math.cos(el)*Math.cos(az)];const forward=vn(vsub(target,eye)),right=vn(vcross(forward,[0,1,0])),up=vn(vcross(right,forward));return basis={eye,forward,right,up}}
+function project(pt){const {eye,forward,right,up}=basis,q=vsub(pt,eye),z=vdot(q,forward);if(z<=0.1)return null;const fy=Math.tan(camera.fov/2),as=canvas.width/canvas.height;return{x:(.5+vdot(q,right)/(2*z*fy*as))*canvas.clientWidth,y:(.5-vdot(q,up)/(2*z*fy))*canvas.clientHeight,z}}
+function ray(sx,sy){const x=2*sx/canvas.clientWidth-1,y=1-2*sy/canvas.clientHeight,as=canvas.clientWidth/canvas.clientHeight,f=Math.tan(camera.fov/2);return{origin:basis.eye,dir:vn(vadd(basis.forward,vadd(vmul(basis.right,x*f*as),vmul(basis.up,y*f))))}}
+function groundPoint(sx,sy,atHeight=0){const r=ray(sx,sy),t=(atHeight-r.origin[1])/(r.dir[1]||.00001);if(t<0)return null;const p=vadd(r.origin,vmul(r.dir,t));return{x:p[0],z:p[2],y:atHeight}}
+function matrixVP(){const {eye,forward,right,up}=basis;const near=1,far=20000,asp=canvas.width/canvas.height,f=1/Math.tan(camera.fov/2);const view=[right[0],up[0],-forward[0],0,right[1],up[1],-forward[1],0,right[2],up[2],-forward[2],0,-vdot(right,eye),-vdot(up,eye),vdot(forward,eye),1];const proj=[f/asp,0,0,0,0,f,0,0,0,0,(far+near)/(near-far),-1,0,0,2*far*near/(near-far),0];let m=new Float32Array(16);for(let j=0;j<4;j++)for(let i=0;i<4;i++){m[j*4+i]=0;for(let k=0;k<4;k++)m[j*4+i]+=proj[k*4+i]*view[j*4+k]}return m}
+function resize(){const dpr=Math.min(devicePixelRatio||1,2),w=Math.round(canvas.clientWidth*dpr),h=Math.round(canvas.clientHeight*dpr);if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl&&gl.viewport(0,0,w,h)}}
+let hoverPort=null,hoverTrack=null,hoverProp=null,mouse={x:0,y:0,inside:false};
+function segmentDistance(x,y,a,b){const dx=b.x-a.x,dy=b.y-a.y,t=clamp(((x-a.x)*dx+(y-a.y)*dy)/(dx*dx+dy*dy||1),0,1);return Math.hypot(x-a.x-dx*t,y-a.y-dy*t)}
+function pickAt(x,y){let best=null,dist=20;const ports=freePorts();if(tab==='track')for(const p of ports){const q=project([p.x,p.y+6,p.z]);if(q){const d=Math.hypot(q.x-x,q.y-y);if(d<dist){best={kind:'port',p};dist=d}}}if(best&&dist<15)return best;
+ dist=14;for(const t of S.tracks)for(const path of samplePaths(t)){for(let i=1;i<path.length;i++){const a=project([path[i-1].x,path[i-1].y+5,path[i-1].z]),b=project([path[i].x,path[i].y+5,path[i].z]);if(!a||!b)continue;const d=segmentDistance(x,y,a,b);if(d<dist){best={kind:'track',t};dist=d}}}if(best)return best;
+ dist=23;for(const p of S.props){const pr=project([p.x,terrainAt(p.x,p.z)+25,p.z]);if(!pr)continue;const d=Math.hypot(pr.x-x,pr.y-y);if(d<dist){best={kind:'prop',p};dist=d}}return best}
+function refreshOverlay(){const old=$('markers');if(old)old.remove();if(tab!=='track')return;const parent=$('overlay'),e=document.createElement('div');e.id='markers';e.style.cssText='position:absolute;inset:0;pointer-events:none';const ports=freePorts();for(const p of ports){const pr=project([p.x,p.y+6,p.z]);if(!pr||pr.x<0||pr.y<0||pr.x>canvas.clientWidth||pr.y>canvas.clientHeight)continue;const selectedPort=hoverPort&&hoverPort.t.id===p.t.id&&hoverPort.idx===p.idx;const el=document.createElement('div');el.style.cssText=`position:absolute;left:${pr.x}px;top:${pr.y}px;transform:translate(-50%,-50%);width:${selectedPort?19:12}px;height:${selectedPort?19:12}px;border:2px solid #d5ffe9;background:${selectedPort?'#b3ffdb':'#41cf9c'};border-radius:50%;box-shadow:0 0 ${selectedPort?19:8}px #3ccea2aa,0 0 0 3px #18352888;opacity:.95`;e.appendChild(el)}parent.appendChild(e)}
+function trainSample(t){if(!route.length)return null;const total=route[route.length-1].dist||1;let d=(t%1+1)%1*total;for(let i=1;i<route.length;i++){if(route[i].dist>=d){const a=route[i-1],b=route[i],r=(d-a.dist)/(b.dist-a.dist||1);return{x:mix(a.x,b.x,r),y:mix(a.y,b.y,r),z:mix(a.z,b.z,r),ang:Math.atan2(b.z-a.z,b.x-a.x)}}}return {...route[route.length-1],ang:0}}
+function makeTrain(){const g=new Geom();if(!previewRunning||route.length<2)return g;for(let i=0;i<3;i++){const p=trainSample(previewTime-i*.065);if(!p)continue;const y=p.y+10,a=p.ang;rotatedBox(g,p.x,y+11,p.z,i===0?67:57,22,27,a,i===0?C.train:C.train2);const nose=rot(22,0,a),q=[p.x+nose[0],p.z+nose[1]];rotatedBox(g,q[0],y+24,q[1],20,13,24,a,C.wall);for(const s of [-1,1]){const r=rot(17,s*14,a);g.box(p.x+r[0],y-2,p.z+r[1],8,10,7,C.edge)}}return g}
+function paintCanvas2D(){
+ // Software-rendered 3D fallback for computers/browsers without WebGL.
+ const c=ctx2d,dpr=canvas.width/canvas.clientWidth;c.setTransform(1,0,0,1,0,0);c.fillStyle='#102037';c.fillRect(0,0,canvas.width,canvas.height);
+ const faces=[];const drawOrder=xray?['board','track','selection','scenery','train','terrain']:['board','terrain','track','selection','scenery','train'];for(const key of drawOrder){if(key==='train'&&!previewRunning)continue;const m=mesh[key];if(!m)continue;const v=m.v,alpha=(key==='terrain'&&xray)?.27:1;for(let i=0;i<v.length;i+=27){const points=[],q=[];for(let k=0;k<3;k++){const j=i+9*k,pos=[v[j],v[j+1],v[j+2]],pr=project(pos);if(!pr)break;q.push(pr);points.push(pos)}if(q.length!==3)continue;const nr=[v[i+3],v[i+4],v[i+5]],brightness=clamp(.52+.52*vdot(nr,vn([-.35,.85,.65])),.37,1);faces.push({q,layer:drawOrder.indexOf(key),depth:(q[0].z+q[1].z+q[2].z)/3,r:Math.round(255*v[i+6]*brightness),g:Math.round(255*v[i+7]*brightness),b:Math.round(255*v[i+8]*brightness),alpha})}}
+ faces.sort((a,b)=>a.layer-b.layer||b.depth-a.depth);c.scale(dpr,dpr);
+ for(const f of faces){const a=f.q;c.fillStyle=`rgba(${f.r},${f.g},${f.b},${f.alpha})`;c.beginPath();c.moveTo(a[0].x,a[0].y);c.lineTo(a[1].x,a[1].y);c.lineTo(a[2].x,a[2].y);c.closePath();c.fill()}
+}
+function drawFrame(time){resize();getCamera();if(dirty)buildMesh();if(!graphicsOK)return;if(previewRunning){previewTime+=(Math.min(40,time-(drawFrame.prev||time))||16)/26000;mesh.train=makeTrain();if(gl)uploadMesh('train',mesh.train)}
+ if(gl){gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.057,.085,.128,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.uniformMatrix4fv(loc.vp,false,matrixVP());draw('board');if(!xray)draw('terrain');draw('track');draw('selection');draw('scenery');if(xray){gl.depthMask(false);draw('terrain',.24);gl.depthMask(true)}if(previewRunning)draw('train')}
+ else if(time-(drawFrame.paintTime||0)>45){paintCanvas2D();drawFrame.paintTime=time}
+ drawFrame.prev=time;if(time-(drawFrame.uiTime||0)>100){refreshOverlay();drawFrame.uiTime=time}requestAnimationFrame(drawFrame)}
+// --- Route: route through the primary (straight) turnout branch; choose a connected chain or closed loop ---
+function computeRoute(){const pieces=S.tracks;if(!pieces.length){route=[];return}const conn=portConnections();let best=[];
+ for(const start of pieces.slice(0,Math.min(pieces.length,35))){for(const entry of [0,1]){let t=start,enter=entry,seen=new Set(),points=[];for(let step=0;step<pieces.length+2;step++){if(!t||seen.has(t.id))break;seen.add(t.id);let path=samplePaths(t)[0];if(enter===1)path=path.slice().reverse();if(enter===2){path=samplePaths(t)[1].slice().reverse()}if(points.length&&Math.hypot(points[points.length-1].x-path[0].x,points[points.length-1].z-path[0].z)>2)break;points.push(...(points.length?path.slice(1):path));const exit=enter===0?1:0,b=conn.get(t.id+':'+exit);if(!b)break;if(b.track.id===start.id){points.push({...points[0]});break}t=b.track;enter=b.index;if(enter===2){ /* turnout incoming from branch uses branch route */ }}if(points.length>best.length)best=points}}
+ let d=0;route=best.map((p,i)=>{if(i)d+=Math.hypot(p.x-best[i-1].x,p.y-best[i-1].y,p.z-best[i-1].z);return {...p,dist:d}});
+}
+// --- Editor UI / project actions ---
+let moveMode=false,pointer=null,lastSculpt=0,toastTimer=null;
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),2400)}
+function renderCatalog(){const query=$('catalogSearch').value.toLowerCase().trim(),container=$('catalog');container.innerHTML='';let shown=0;for(const group of ['Straights','Curves','Turnouts']){const parts=PARTS.filter(p=>p.group===group&&(!query||((p.id+' '+p.title).toLowerCase().includes(query))));if(!parts.length)continue;const title=document.createElement('div');title.className='catTitle';title.textContent=group;container.appendChild(title);for(const p of parts){shown++;const b=document.createElement('button');b.className='part'+(active===p.id?' active':'');const icon=p.kind==='straight'?'━━━━':p.kind==='curve'?(p.sign===1?'╰──':'╭──'):(p.sign===1?'Y':'⅄');b.innerHTML='<div class="partIcon">'+icon+'</div><div><strong>'+p.id+'</strong><small>'+p.title+'</small></div>';b.addEventListener('click',()=>{active=p.id;moveMode=false;renderCatalog();toast(p.id+' selected · click a glowing connector');});container.appendChild(b)}}if(!shown)container.innerHTML='<div class="catalogEmpty">No matching track sections</div>';$('countParts').textContent=PARTS.length+' variants'}
+function setTab(t){tab=t;for(const b of document.querySelectorAll('.tab'))b.classList.toggle('active',b.dataset.tab===t);for(const key of ['track','terrain','scene'])$(key+'Tab').classList.toggle('hidden',key!==t);$('modeHud').textContent=t==='track'?'TRACK BUILDER':t==='terrain'?'TERRAIN SCULPTING':'SCENERY PLACEMENT';$('bottomHud').textContent=t==='track'?(moveMode?'Move: left-drag connected tracks · right-drag orbit · Del remove':'Choose piece → click green endpoint to connect · Left click to select · Right drag to orbit'):t==='terrain'?'Left drag to sculpt · Right drag to orbit · Middle drag to pan · Scroll to zoom':'Choose scenery → click table to place · Click an object to select';renderInspector()}
+function setProp(id,k,v){const p=byId(id);if(!p)return;saveUndo();p[k]=v;refreshAll()}
+function updateTrackHeights(id,idx,value){const t=byId(id);if(!t||!Number.isFinite(value))return;saveUndo();updatePortHeight(t,idx,clamp(value,-100,600));refreshAll()}
+function updateSelectedLevel(id,v){const t=byId(id);if(!t)return;saveUndo();updatePortHeight(t,0,v);updatePortHeight(t,1,v);refreshAll()}
+function prettyNum(n){return Number(n.toFixed(1))}
+function warnings(){let tooSteep=S.tracks.filter(t=>grade(t)>3.5),outside=S.tracks.filter(t=>samplePaths(t).some(path=>path.some(p=>Math.abs(p.x)>S.board.w/2-18||Math.abs(p.z)>S.board.d/2-18)));return{tooSteep,outside}}
+function renderInspector(){const el=$('inspector');el.innerHTML='';const warn=warnings(),conn=portConnections();const sel=selected&&byId(selected.id);let h='';
+ if(sel&&selected.kind==='track'){const t=sel,p=partById[t.pid],ports=wports(t),g=grade(t),n=connectedGroup(t.id).length;h=`<div class="selectionBadge"><small>SELECTED M-TRACK SECTION</small><b>${t.pid}</b><small>${p.title}</small></div><div class="section"><div class="sectionTitle">Elevation and grade</div><div class="field"><label>Start height · mm</label><input id="height0" class="input" type="number" min="-100" max="600" step="1" value="${prettyNum(t.h0)}"></div><div class="field"><label>End height · mm</label><input id="height1" class="input" type="number" min="-100" max="600" step="1" value="${prettyNum(t.h1)}"></div><div class="row between"><span class="muted">Gradient</span><span class="pill ${g>3.5?'bad':g>3?'amber':'good'}">${g.toFixed(2)}%</span></div><div class="bar" style="margin:8px 0"><div style="width:${Math.min(100,g/6*100)}%;background:${g>3.5?'#fb8490':'#5cceaa'}"></div></div><p class="fine">Change either endpoint to make a slope. Connected neighbors keep their joint aligned.</p><div class="grid2"><button class="btn small" id="level0">Set to ground</button><button class="btn small" id="levelBuild">Set to build height</button></div></div><div class="section"><div class="sectionTitle">Construction</div><div class="mapKey"><span>Length (centreline)</span><b>${lengthOf(t).toFixed(1)} mm</b></div><div class="mapKey"><span>Attached track group</span><b>${n} pieces</b></div><div class="mapKey"><span>Connectors free</span><b>${ports.filter((_,i)=>!conn.has(t.id+':'+i)).length} / ${ports.length}</b></div><label class="check"><input type="checkbox" id="tunnelChk" ${t.tunnel?'checked':''}> Mark as tunnel segment</label><div class="grid2"><button class="btn small" id="moveBtn">${moveMode?'✓ Moving':'✥ Move group'}</button><button class="btn small warn" id="deleteBtn">✕ Delete piece</button></div></div>`;if(g>3.5)h+='<div class="message alert">This section is steeper than 3.5%. Most trains will struggle, particularly with longer consists.</div>'}
+ else if(sel&&selected.kind==='prop'){h=`<div class="selectionBadge"><small>SELECTED SCENERY</small><b>${sel.type[0].toUpperCase()+sel.type.slice(1)}</b><small>Low-poly scenery object</small></div><div class="section"><div class="sectionTitle">Position and scale</div><div class="field"><label>Position X (mm)</label><input class="input" type="number" id="propX" value="${prettyNum(sel.x)}"></div><div class="field"><label>Position Z (mm)</label><input class="input" type="number" id="propZ" value="${prettyNum(sel.z)}"></div><div class="field"><label>Scale</label><input class="input" type="number" id="propScale" min="0.2" max="4" step="0.1" value="${prettyNum(sel.scale)}"></div><div class="grid2"><button class="btn small" id="moveBtn">✥ Move object</button><button class="btn small warn" id="deleteBtn">✕ Delete</button></div></div>`}
+ else {const counts={};for(const t of S.tracks)counts[t.pid]=(counts[t.pid]||0)+1;const heightMax=Math.max(0,...S.tracks.map(t=>Math.max(t.h0,t.h1)));h=`<div class="section"><div class="sectionTitle">Project overview</div><div class="stats"><div class="stat"><b>${S.tracks.length}</b><small>Track pieces</small></div><div class="stat"><b>${S.props.length}</b><small>Scenery</small></div><div class="stat"><b>${heightMax.toFixed(0)}</b><small>Max height mm</small></div></div><div class="mapKey"><span>Board</span><b>${S.board.w} × ${S.board.d} mm</b></div><div class="mapKey"><span>Track types in use</span><b>${Object.keys(counts).length}</b></div><div class="mapKey"><span>Free connection points</span><b>${freePorts().length}</b></div><div class="mapKey"><span>Detectable train route</span><b>${(route.length>1?route[route.length-1].dist/1000:0).toFixed(2)} m</b></div></div><div class="section"><div class="sectionTitle">Planning checks</div><div class="message ${warn.tooSteep.length?'alert':''}">${warn.tooSteep.length?'⚠ '+warn.tooSteep.length+' steep section(s) above 3.5%':'✓ No over-steep sections detected'}</div><div class="message ${warn.outside.length?'alert':''}">${warn.outside.length?'⚠ '+warn.outside.length+' section(s) outside the board':'✓ Tracks stay inside the baseboard'}</div></div><div class="section"><div class="sectionTitle">Parts to obtain</div>${Object.entries(counts).sort((a,b)=>a[0].localeCompare(b[0])).map(([k,v])=>`<div class="mapKey"><span>${k}</span><b>× ${v}</b></div>`).join('')||'<p class="note">Add some rails to build your inventory.</p>'}</div>`}
+ el.innerHTML=h;
+ if(sel&&selected.kind==='track'){for(let i=0;i<2;i++)$('height'+i).addEventListener('change',e=>updateTrackHeights(sel.id,i,+e.target.value));$('level0').onclick=()=>updateSelectedLevel(sel.id,0);$('levelBuild').onclick=()=>updateSelectedLevel(sel.id,buildHeight);$('tunnelChk').onchange=e=>setProp(sel.id,'tunnel',e.target.checked)}
+ if(sel&&selected.kind==='prop'){for(const [input,key] of [['propX','x'],['propZ','z'],['propScale','scale']])$(input).addEventListener('change',e=>setProp(sel.id,key,+e.target.value))}
+ if(sel){$('moveBtn').onclick=()=>{moveMode=!moveMode;setTab(sel.pid?'track':'scene');renderInspector();toast(moveMode?'Left-drag to move the connected group':'Move mode off')};$('deleteBtn').onclick=deleteSelection}
+}
+function refreshAll(){dirty=true;renderInspector();updateUndo();$('boardW').value=S.board.w;$('boardD').value=S.board.d;}
+function deleteSelection(){if(!selected)return;saveUndo();if(selected.kind==='track')S.tracks=S.tracks.filter(t=>t.id!==selected.id);else S.props=S.props.filter(p=>p.id!==selected.id);selected=null;refreshAll();toast('Removed object')}
+function applyBoard(){const w=clamp(+$('boardW').value||2200,700,6000),d=clamp(+$('boardD').value||1100,500,4000);saveUndo();S.board={w,d};refreshAll();toast('Board resized to '+w+' × '+d+' mm')}
+function applySculpt(x,z,flattenHeight=null){const {w,d}=S.board,r=+$('brushRadius').value,str=+$('brushStrength').value;for(let j=0;j<=GRID_Z;j++)for(let i=0;i<=GRID_X;i++){const px=(i/GRID_X-.5)*w,pz=(j/GRID_Z-.5)*d,dist=Math.hypot(px-x,pz-z);if(dist>r)continue;const weight=(1-dist/r)**2,ix=terrainIndex(i,j),old=S.terrain[ix];if(brush==='raise')S.terrain[ix]=clamp(old+str*weight,0,350);else if(brush==='lower')S.terrain[ix]=clamp(old-str*weight,0,350);else if(brush==='flatten')S.terrain[ix]=mix(old,flattenHeight,clamp(weight*.38,0,1));else{let sum=0,n=0;for(let jj=Math.max(0,j-1);jj<=Math.min(GRID_Z,j+1);jj++)for(let ii=Math.max(0,i-1);ii<=Math.min(GRID_X,i+1);ii++){sum+=S.terrain[terrainIndex(ii,jj)];n++}S.terrain[ix]=mix(old,sum/n,weight*.34)}}dirty=true}
+function isInside(p){return p&&Math.abs(p.x)<=S.board.w/2&&Math.abs(p.z)<=S.board.d/2}
+function onDown(e){if(e.target!==canvas)return;canvas.setPointerCapture(e.pointerId);const r=canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;mouse={x,y,inside:true};pointer={x,y,lastX:x,lastY:y,button:e.button,mode:e.button===2?'orbit':e.button===1?'pan':'click',moved:false,origin:null,group:null,initial:null,flatten:null};if(e.button!==0)return;
+ if(tab==='terrain'){const gp=groundPoint(x,y);if(!isInside(gp))return;saveUndo();pointer.mode='sculpt';pointer.flatten=terrainAt(gp.x,gp.z);applySculpt(gp.x,gp.z,pointer.flatten);return}
+ const hit=pickAt(x,y);
+ if(tab==='track'&&hit&&hit.kind==='port'&&!moveMode){attachTrack(active,hit.p.t,hit.p.idx);pointer.mode='none';return}
+ if(moveMode&&hit&&(hit.kind==='track'||hit.kind==='prop')){const target=hit.t||hit.p;selected={kind:hit.kind,id:target.id};pointer.mode='move';pointer.group=hit.kind==='track'?connectedGroup(target.id):[target.id];pointer.initial=pointer.group.map(id=>{const t=byId(id);return {id,x:t.x,z:t.z}});pointer.origin=groundPoint(x,y);saveUndo();renderInspector();return}
+ if(hit&&hit.kind==='track'){selected={kind:'track',id:hit.t.id};renderInspector();dirty=true;pointer.mode='none';return}
+ if(hit&&hit.kind==='prop'){selected={kind:'prop',id:hit.p.id};renderInspector();pointer.mode='none';return}
+ const gp=groundPoint(x,y);if(!isInside(gp))return;
+ if(tab==='track'){saveUndo();const t=makeTrack(active,Math.round(gp.x/5)*5,Math.round(gp.z/5)*5,heading,buildHeight);S.tracks.push(t);selected={kind:'track',id:t.id};refreshAll();toast('Placed '+active+' · attach more at green endpoints')}
+ if(tab==='scene'){saveUndo();const p={id:serial++,type:propType,x:Math.round(gp.x/5)*5,z:Math.round(gp.z/5)*5,scale:1};S.props.push(p);selected={kind:'prop',id:p.id};refreshAll();toast('Placed '+propType)}pointer.mode='none';}
+function onMove(e){const r=canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;mouse={x,y,inside:true};if(pointer){const dx=x-pointer.lastX,dy=y-pointer.lastY;pointer.lastX=x;pointer.lastY=y;if(Math.hypot(x-pointer.x,y-pointer.y)>3)pointer.moved=true;if(pointer.mode==='orbit'){camera.az-=dx*.006;camera.el=clamp(camera.el+dy*.005,.12,1.55)}else if(pointer.mode==='pan'){const fac=camera.dist*.0015;camera.target=vadd(camera.target,vadd(vmul(basis.right,-dx*fac),vmul(basis.up,dy*fac)))}else if(pointer.mode==='sculpt'){const p=groundPoint(x,y);if(isInside(p)&&performance.now()-lastSculpt>22){applySculpt(p.x,p.z,pointer.flatten);lastSculpt=performance.now()}}else if(pointer.mode==='move'){const p=groundPoint(x,y);if(p&&pointer.origin){const mx=p.x-pointer.origin.x,mz=p.z-pointer.origin.z;for(const a of pointer.initial){const t=byId(a.id);if(t){t.x=Math.round((a.x+mx)/2)*2;t.z=Math.round((a.z+mz)/2)*2}}dirty=true;renderInspector()}}}
+ if(!pointer||pointer.mode==='none'||pointer.mode==='click'){const hit=pickAt(x,y);hoverPort=hit?.kind==='port'?hit.p:null;hoverTrack=hit?.kind==='track'?hit.t:null;canvas.style.cursor=tab==='terrain'?'crosshair':hit?.kind==='port'?'copy':hit?.kind==='track'?'pointer':moveMode?'grab':'crosshair'}else canvas.style.cursor=pointer.mode==='orbit'?'grabbing':'crosshair';}
+function onUp(e){if(!pointer)return;pointer=null;if(dirty)renderInspector()}
+canvas.addEventListener('pointerdown',onDown);canvas.addEventListener('pointermove',onMove);canvas.addEventListener('pointerup',onUp);canvas.addEventListener('pointercancel',onUp);canvas.addEventListener('pointerleave',()=>mouse.inside=false);canvas.addEventListener('contextmenu',e=>e.preventDefault());canvas.addEventListener('wheel',e=>{e.preventDefault();camera.dist=clamp(camera.dist*Math.exp(e.deltaY*.001),250,14000)},{passive:false});
+function cameraFit(){camera.target=[0,25,0];camera.dist=Math.max(S.board.w*1.28,S.board.d*2);camera.az=.5;camera.el=.98}
+function download(name,body,type='text/plain'){const blob=body instanceof Blob?body:new Blob([body],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),20000)}
+function projectJSON(){return JSON.stringify({format:'RailForge-MTrack-v1',units:'mm',board:S.board,tracks:S.tracks,props:S.props,terrain:{nx:GRID_X,nz:GRID_Z,heights:S.terrain}},null,2)}
+function importProject(raw){const data=JSON.parse(raw);if(data.format!=='RailForge-MTrack-v1'||!data.board||!Array.isArray(data.tracks)||!Array.isArray(data.props)||!Array.isArray(data.terrain?.heights)||data.terrain.heights.length!==(GRID_X+1)*(GRID_Z+1))throw Error('Not a valid RailForge project');if(data.tracks.length>3000||data.props.length>2000)throw Error('Project too large');saveUndo();S={board:{w:clamp(+data.board.w||2200,700,6000),d:clamp(+data.board.d||1100,500,4000)},tracks:data.tracks.filter(t=>partById[t.pid]).map(t=>({...t,x:clamp(+t.x||0,-10000,10000),z:clamp(+t.z||0,-10000,10000),a:+t.a||0,h0:clamp(+t.h0||0,-100,600),h1:clamp(+t.h1||0,-100,600)})),props:data.props,terrain:data.terrain.heights.map(v=>clamp(+v||0,0,350))};serial=Math.max(1,...S.tracks.map(x=>+x.id||0),...S.props.map(x=>+x.id||0))+1;selected=null;cameraFit();refreshAll();toast('Project loaded')}
+function resetProject(keepDemo){if(S.tracks.length||S.props.length)if(!confirm(keepDemo?'Replace your layout with the example?':'Clear the current layout? Save it first if needed.'))return;saveUndo();S={board:{w:2200,d:1100},tracks:[],props:[],terrain:Array((GRID_X+1)*(GRID_Z+1)).fill(0)};serial=1;selected=null;if(keepDemo)seedOval();cameraFit();refreshAll();toast(keepDemo?'Example layout loaded':'New empty project')}
+// Static OBJ + material export (ZIP, so it is import-ready in Blender).
+function cleanGeometry(){const out={board:new Geom(),terrain:new Geom(),tracks:new Geom(),scenery:new Geom()};out.board.box(0,-30,0,S.board.w,30,S.board.d,C.board);out.board.box(0,-36,0,S.board.w,6,S.board.d,C.edge);for(const x of [-S.board.w/2+55,S.board.w/2-55])for(const z of [-S.board.d/2+55,S.board.d/2-55])out.board.box(x,-175,z,38,145,38,C.edge);addTerrain(out.terrain);for(const t of S.tracks)addTrack(out.tracks,t);for(const p of S.props)addProp(out.scenery,p);return out}
+function makeOBJ(){const geo=cleanGeometry();let obj=['# RailForge M-track layout | Blender units = metres','mtllib railway.mtl'],mtl=[],vOffset=1,used=new Map();for(const [name,g] of Object.entries(geo)){obj.push('o '+name);let last='';for(let i=0;i<g.v.length;i+=27){let v=g.v,rr=Math.round(v[i+6]*255),gg=Math.round(v[i+7]*255),bb=Math.round(v[i+8]*255),hex=[rr,gg,bb].map(n=>n.toString(16).padStart(2,'0')).join(''),mat='M_'+hex;if(!used.has(mat)){used.set(mat,true);mtl.push('newmtl '+mat,'Kd '+[rr/255,gg/255,bb/255].join(' '),'Ka 0.1 0.1 0.1','Ks 0.12 0.12 0.12','Ns 12','')}if(last!==mat){obj.push('usemtl '+mat);last=mat}for(let j=0;j<3;j++){const k=i+j*9;obj.push('v '+(v[k]/1000).toFixed(5)+' '+(v[k+2]/1000).toFixed(5)+' '+(v[k+1]/1000).toFixed(5))}obj.push('f '+vOffset+' '+(vOffset+1)+' '+(vOffset+2));vOffset+=3}}return{obj:obj.join('\n'),mtl:mtl.join('\n')}}
+function crc32(bytes){let c=-1;for(const b of bytes){c^=b;for(let i=0;i<8;i++)c=(c>>>1)^((c&1)?0xEDB88320:0)}return(c^(-1))>>>0}
+function makeZIP(items){const te=new TextEncoder(),chunks=[],central=[];let offset=0;function put16(a,x){a.push(x&255,x>>>8&255)}function put32(a,x){a.push(x&255,x>>>8&255,x>>>16&255,x>>>24&255)}for(const [name,text] of Object.entries(items)){const filename=te.encode(name),data=te.encode(text),crc=crc32(data),h=[];put32(h,0x04034b50);put16(h,20);put16(h,0);put16(h,0);put16(h,0);put16(h,0);put32(h,crc);put32(h,data.length);put32(h,data.length);put16(h,filename.length);put16(h,0);chunks.push(new Uint8Array(h),filename,data);const ch=[];put32(ch,0x02014b50);put16(ch,20);put16(ch,20);put16(ch,0);put16(ch,0);put16(ch,0);put16(ch,0);put32(ch,crc);put32(ch,data.length);put32(ch,data.length);put16(ch,filename.length);put16(ch,0);put16(ch,0);put16(ch,0);put16(ch,0);put32(ch,0);put32(ch,offset);central.push(new Uint8Array(ch),filename);offset+=h.length+filename.length+data.length}const centralSize=central.reduce((s,a)=>s+a.length,0),start=offset,end=[];put32(end,0x06054b50);put16(end,0);put16(end,0);put16(end,Object.keys(items).length);put16(end,Object.keys(items).length);put32(end,centralSize);put32(end,start);put16(end,0);return new Blob([...chunks,...central,new Uint8Array(end)],{type:'application/zip'})}
+function makeBlender(){const raw=cleanGeometry(),palette=[],colors=new Map(),geometry={};for(const [name,g] of Object.entries(raw)){const xyz=[],faces=[];for(let i=0;i<g.v.length;i+=27){for(let k=0;k<3;k++){const j=i+k*9;xyz.push(Math.round(g.v[j]*10)/10,Math.round(g.v[j+1]*10)/10,Math.round(g.v[j+2]*10)/10)}const key=g.v.slice(i+6,i+9).map(c=>Math.round(c*255)).join(',');if(!colors.has(key)){colors.set(key,palette.length);palette.push(key.split(',').map(Number))}faces.push(colors.get(key))}geometry[name]={xyz,faces}}const data=JSON.stringify({palette,geometry,route:route.map(p=>[Math.round(p.x*10)/10,Math.round(p.y*10)/10,Math.round(p.z*10)/10]),closed:route.length>3&&Math.hypot(route[0].x-route[route.length-1].x,route[0].z-route[route.length-1].z)<2,board:S.board,pieces:S.tracks.map(t=>t.pid)});
+return `# RAILFORGE - Blender scene builder and animated train path
+# Generated entirely offline in the RailForge web editor.
+# Blender 3.6+ / 4.x: Scripting workspace > Open > Run Script.
+import bpy, json, math
+from mathutils import Vector
+DATA = json.loads(r'''${data}''')
+
+# A 2200 mm board becomes a 2.2 metre board in Blender.
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete(use_global=False)
+for collection in list(bpy.data.collections):
+    if collection.name != 'Collection':
+        bpy.data.collections.remove(collection)
+
+material_cache = []
+for i, rgb in enumerate(DATA['palette']):
+    m = bpy.data.materials.new('RailForge material %02d' % i)
+    m.diffuse_color = (rgb[0]/255, rgb[1]/255, rgb[2]/255, 1)
+    m.use_nodes = True
+    bsdf = m.node_tree.nodes.get('Principled BSDF')
+    if bsdf:
+        bsdf.inputs['Base Color'].default_value = m.diffuse_color
+        bsdf.inputs['Roughness'].default_value = 0.85
+    material_cache.append(m)
+
+def collection_named(name):
+    c = bpy.data.collections.new(name)
+    bpy.context.scene.collection.children.link(c)
+    return c
+
+collections = {k:collection_named(k.title()) for k in DATA['geometry']}
+for group, packed in DATA['geometry'].items():
+    xyz = packed['xyz']
+    if not xyz: continue
+    vertices = [(xyz[i]*0.001,xyz[i+2]*0.001,xyz[i+1]*0.001) for i in range(0,len(xyz),3)]
+    polygons = [(i,i+1,i+2) for i in range(0,len(vertices),3)]
+    me = bpy.data.meshes.new(group+' mesh')
+    me.from_pydata(vertices, [], polygons)
+    me.update()
+    obj = bpy.data.objects.new(group.title()+' | low poly', me)
+    collections[group].objects.link(obj)
+    for mat in material_cache: me.materials.append(mat)
+    for poly, index in zip(me.polygons, packed['faces']):
+        poly.material_index = index
+        poly.use_smooth = False
+
+# A real Blender curve: selectable, editable, reusable as an animation path.
+route = DATA['route']
+if len(route)>1:
+    paths = collection_named('TRAIN PATH & ANIMATION')
+    curve = bpy.data.curves.new('Railway centerline - animation', type='CURVE')
+    curve.dimensions = '3D'
+    curve.resolution_u = 16
+    curve.path_duration = 300
+    poly = curve.splines.new('POLY')
+    points = route[:-1] if DATA['closed'] else route
+    poly.points.add(len(points)-1)
+    for point, (x,y,z) in zip(poly.points,points):
+        point.co = (x*0.001,z*0.001,(y+10)*0.001,1)
+    poly.use_cyclic_u = bool(DATA['closed'])
+    path_obj = bpy.data.objects.new('TRAIN ROUTE - edit this curve',curve)
+    paths.objects.link(path_obj)
+
+    def make_train(name, offset, color, length):
+        bpy.ops.mesh.primitive_cube_add(size=1)
+        obj=bpy.context.object
+        obj.name=name
+        for coll in list(obj.users_collection): coll.objects.unlink(obj)
+        paths.objects.link(obj)
+        obj.scale=(length,0.026,0.025)
+        bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+        # Raise the mesh relative to the constraint's route position.
+        for v in obj.data.vertices: v.co.z += 0.018
+        mat=bpy.data.materials.new(name+' paint')
+        mat.diffuse_color=(*color,1)
+        obj.data.materials.append(mat)
+        f=obj.constraints.new(type='FOLLOW_PATH')
+        f.name='Animated along track path'
+        f.target=path_obj
+        f.use_fixed_location=True
+        f.use_curve_follow=True
+        f.forward_axis='FORWARD_X'
+        f.up_axis='UP_Z'
+        driver=f.driver_add('offset_factor').driver
+        if DATA['closed']:
+            driver.expression='((frame - 1.0) / 300.0 - %.4f) %% 1.0' % offset
+        else:
+            driver.expression='max(0.0,min(1.0,(frame - 1.0) / 300.0 - %.4f))' % offset
+        return obj
+
+    make_train('01 Locomotive',0.0,(0.98,0.68,0.24),0.069)
+    make_train('02 Wagon',0.058,(0.34,0.57,0.72),0.060)
+    make_train('03 Wagon',0.116,(0.34,0.57,0.72),0.060)
+
+# Presentation-ready light and camera.
+scene=bpy.context.scene
+scene.render.engine='CYCLES'
+scene.cycles.samples=24
+scene.render.resolution_x=1600
+scene.render.resolution_y=900
+scene.render.resolution_percentage=100
+scene.frame_start=1
+scene.frame_end=300
+scene.world.color=(0.22,0.22,0.22)
+
+bpy.ops.object.camera_add(location=(2.8,-2.4,2.3))
+cam=bpy.context.object
+cam.name='Presentation camera'
+cam.rotation_euler=(Vector((0,0,0))-cam.location).to_track_quat('-Z','Y').to_euler()
+cam.data.type='ORTHO'
+cam.data.ortho_scale=max(3.0,DATA['board']['w']*0.001*1.75)
+scene.camera=cam
+
+bpy.ops.object.light_add(type='AREA', location=(-1.5,-1.2,3.6))
+light=bpy.context.object
+light.name='Large softbox'
+light.data.energy=650
+light.data.shape='DISK'
+light.data.size=5.5
+
+bpy.ops.object.light_add(type='AREA',location=(1.5,1.6,2.4))
+light2=bpy.context.object
+light2.name='Fill light'
+light2.data.energy=350
+light2.data.size=4
+
+# Viewport in material preview mode with the entire railway framed.
+for area in bpy.context.screen.areas:
+    if area.type=='VIEW_3D':
+        area.spaces.active.shading.type='MATERIAL'
+        area.spaces.active.region_3d.view_distance=3.8
+        area.spaces.active.region_3d.view_location=(0,0,0)
+
+scene.frame_set(1)
+print('RailForge import successful! Press Space to animate the train, or F12 to render.')
+`}
+// wire everything up
+for(const b of document.querySelectorAll('.tab'))b.addEventListener('click',()=>setTab(b.dataset.tab));
+for(const b of document.querySelectorAll('.levelPreset'))b.addEventListener('click',()=>{buildHeight=+b.dataset.height;$('buildHeight').value=buildHeight;$('levelLabel').textContent=buildHeight+' mm'});
+$('buildHeight').onchange=e=>{buildHeight=clamp(+e.target.value||0,-100,600);$('levelLabel').textContent=buildHeight+' mm'};
+$('catalogSearch').oninput=renderCatalog;
+$('brushRadius').oninput=e=>$('radiusOut').textContent=e.target.value+' mm';
+$('brushStrength').oninput=e=>$('strengthOut').textContent=e.target.value+' mm';
+for(const b of document.querySelectorAll('[data-brush]'))b.onclick=()=>{brush=b.dataset.brush;for(const el of document.querySelectorAll('[data-brush]'))el.classList.toggle('active',el===b)};
+for(const b of document.querySelectorAll('[data-prop]'))b.onclick=()=>{propType=b.dataset.prop;for(const el of document.querySelectorAll('[data-prop]'))el.classList.toggle('active',el===b)};
+$('resetTerrain').onclick=()=>{if(!confirm('Flatten all terrain heights?'))return;saveUndo();S.terrain.fill(0);refreshAll();toast('Terrain flattened')};
+$('applyBoard').onclick=applyBoard;
+$('newBtn').onclick=()=>resetProject(false);$('demoBtn').onclick=()=>resetProject(true);
+$('saveBtn').onclick=()=>{download('RailForge-layout.json',projectJSON(),'application/json');toast('Project saved to JSON')};
+$('openBtn').onclick=()=>$('projectFile').click();$('projectFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{importProject(await file.text())}catch(err){alert('Could not open project: '+err.message)}e.target.value=''};
+$('undoBtn').onclick=undo;$('redoBtn').onclick=redo;
+$('shotBtn').onclick=()=>{download('RailForge-preview.png',dataURLtoBlob(canvas.toDataURL('image/png')),'image/png');toast('Screenshot saved')};
+function dataURLtoBlob(data){const raw=atob(data.split(',')[1]),u=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)u[i]=raw.charCodeAt(i);return new Blob([u],{type:'image/png'})}
+$('blenderBtn').onclick=()=>{download('RailForge-import-into-Blender.py',makeBlender(),'text/x-python');toast('Blender script downloaded · Scripting → Run Script')};
+$('objBtn').onclick=()=>{const a=makeOBJ();download('RailForge-OBJ-bundle.zip',makeZIP({'railway.obj':a.obj,'railway.mtl':a.mtl,'README.txt':'Extract both files into the same folder, then in Blender: File > Import > Wavefront (.obj). Units: metres (2200 mm = 2.2 m).'}),'application/zip');toast('OBJ and MTL exported in a ZIP')};
+$('topView').onclick=()=>{camera.az=0;camera.el=PI/2-.01;camera.target=[0,0,0]};
+$('isoView').onclick=()=>{camera.az=.55;camera.el=.9};$('zoomFit').onclick=cameraFit;
+$('xrayBtn').onclick=()=>{xray=!xray;$('xrayBtn').classList.toggle('active',xray);toast(xray?'X-ray: translucent terrain':'Terrain fully visible')};
+$('trainBtn').onclick=()=>{if(route.length<3){toast('Add some connected tracks first');return}previewRunning=!previewRunning;$('trainBtn').textContent=previewRunning?'⏸ Stop train':'▶ Preview train';toast(previewRunning?'Approximate 3D train animation running':'Animation paused')};
+function help(open){$('modalBackdrop').classList.toggle('open',open)}$('helpBtn').onclick=() =>help(true);$('showHelpSmall').onclick=()=>help(true);$('closeModal').onclick=()=>help(false);$('gotIt').onclick=()=>help(false);$('modalBackdrop').onclick=e=>{if(e.target===$('modalBackdrop'))help(false)};
+$('dismissHint').onclick=()=>$('hintCard').classList.add('hidden');
+document.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea'))return;const k=e.key.toLowerCase();if((e.ctrlKey||e.metaKey)&&k==='z'){e.preventDefault();e.shiftKey?redo():undo()}else if((e.ctrlKey||e.metaKey)&&k==='y'){e.preventDefault();redo()}else if(k==='delete'||k==='backspace'){e.preventDefault();deleteSelection()}else if(k==='escape'){selected=null;moveMode=false;dirty=true;renderInspector()}else if(k==='r'&&tab==='track'){heading+=PI/2;toast('Free-placement rotation: '+Math.round(heading/RAD)%360+'°')}else if(k==='?'||k==='h')help(true)});
+function init(){seedOval();cameraFit();renderCatalog();refreshAll();if(!graphicsOK){$('viewport').innerHTML='<div style="padding:40px;font-size:18px">This browser has neither WebGL nor Canvas 2D available. Try Chrome, Edge or Firefox.</div>';return}requestAnimationFrame(drawFrame)}
+init();
+window.RailForgeTests={PARTS,S:()=>S,seedOval,computeRoute,portConnections,freePorts,samplePaths,makeBlender,makeOBJ,importProject,projectJSON,attachTrack,grade,localPorts,route:()=>route,terrainAt};
+</script>
+</body></html>
