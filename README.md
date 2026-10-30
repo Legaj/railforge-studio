@@ -2,7 +2,7 @@
 
 A lightweight, open-source, browser-based 3D model railway layout editor focused on **Märklin H0 M-track**. Designed for rapid low-poly prototyping of tabletop railway layouts, multiple levels, terrain, and Blender presentations.
 
-![RailForge Studio editor screenshot](preview.png)
+![RailForge Studio illustration](preview.svg)
 
 ## Features
 
