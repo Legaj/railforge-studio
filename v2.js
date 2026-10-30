@@ -72,6 +72,21 @@ if(S.tracks.some(q=>q.pid===pid&&Math.hypot(q.x-t.x,q.z-t.z)<1&&Math.abs(q.h0-t.
 }
 baseAttach(pid,existing,idx);
 };
+// V1 checked every connector against every other connector on every animation frame.
+// Spatial hashing makes connected-end checks scale roughly linearly with the layout.
+portConnections=function(){
+ const ports=S.tracks.flatMap(t=>wports(t)),bucket=new Map(),result=new Map(),key=(x,y,z)=>`${x}|${y}|${z}`;
+ const quant=p=>[Math.round(p.x/2),Math.round(p.y/2),Math.round(p.z/2)];
+ for(const p of ports){const q=quant(p),pk=portKey(p);let match=null;
+ for(let dx=-1;dx<=1&&!match;dx++)for(let dy=-1;dy<=1&&!match;dy++)for(let dz=-1;dz<=1&&!match;dz++){
+  const candidates=bucket.get(key(q[0]+dx,q[1]+dy,q[2]+dz))||[];
+  for(const other of candidates){if(other.t.id!==p.t.id&&!result.has(portKey(other))&&connectPorts(other,p)){match=other;break}}
+ }
+ if(match){result.set(pk,{track:match.t,index:match.idx});result.set(portKey(match),{track:p.t,index:p.idx})}
+ else{const k=key(...q);if(!bucket.has(k))bucket.set(k,[]);bucket.get(k).push(p)}
+ }
+ return result;
+};
 // New port overlays are persistent DOM nodes, repositioned every frame.
 const overlay=document.createElement('div');overlay.id='v2Layer';overlay.innerHTML='<svg id="v2GhostSVG"></svg><div id="v2Measure"></div>'; $('overlay').appendChild(overlay);
 function portIsFree(p){return freePorts().some(q=>q.t.id===p.t.id&&q.idx===p.idx)}
