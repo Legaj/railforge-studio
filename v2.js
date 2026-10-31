@@ -203,7 +203,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(V2.gapMode||V2.gap
 const oldRefresh=refreshAll;
 refreshAll=function(){oldRefresh();$('v2Info').textContent=`${S.tracks.length} rails · ${freePorts().length} free ends · 1:1 mm`;if(V2.gapStart&&V2.gapEnd){const ports=freePorts();if(!ports.some(q=>portKey(q)===portKey(V2.gapStart))||!ports.some(q=>portKey(q)===portKey(V2.gapEnd)))clearGap();}};
 // Replace the initial version stamp without changing the original model and export format.
-const foot=document.querySelector('.panel.right .footer .fine');if(foot)foot.textContent='PRECISION BUILDER · v2.0';
+const foot=document.querySelector('.panel.right .footer .fine');if(foot)foot.textContent='PRECISION BUILDER · v2.1';
 const hud=$('bottomHud');if(hud)hud.textContent='V2: Choose a rail → hover any green end → click to snap · R rotate · Right drag orbit · Middle drag pan · Scroll zoom';
 renderCatalog();refreshAll();
 window.RailForgeV2={state:V2,partSketch,sizeDescription,findGap,previewPose,refreshOverlay,closeWith:addGapSolution,gapCandidates};
