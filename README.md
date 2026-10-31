@@ -4,6 +4,10 @@ A lightweight, open-source, browser-based 3D model railway layout editor focused
 
 ![RailForge Studio illustration](preview.svg)
 
+## Version 2.1 — smoother blank board
+
+The editor now opens with an **empty** 2200 × 1100 mm board (no tracks, scenery or hills). Choose **Demo** to load the sample railway. Flat terrain renders as one quad (two triangles) rather than 2,800 overlapping triangles; sculpted terrain uses a reduced display mesh while preserving its original editable height data. The terrain is also separated from the plywood top to avoid z-fighting/flickering artifacts. Existing JSON project files remain compatible.
+
 ## Features
 
 - 3D tabletop model editor with adjustable baseboard dimensions in millimetres
